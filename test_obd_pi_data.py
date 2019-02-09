@@ -47,7 +47,7 @@ while (time.time() - initial < 20):
         print val
         led3.value = val
         
-        val = float(speed[counter]) / 50.0
+        val = float(speed[counter]) / 150.0
         print val
         led4.value = val
 
