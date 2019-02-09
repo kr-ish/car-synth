@@ -1,0 +1,31 @@
+MIDS_B: 0620: Supported MIDs [21-40] - 
+MIDS_C: 0640: Supported MIDs [41-60] - 
+INTAKE_TEMP: 010F: Intake Air Temp - 27 degC
+MIDS_A: 0600: Supported MIDs [01-20] - 1111111101001100000100000000000000000000
+MIDS_D: 0660: Supported MIDs [61-80] - 
+MIDS_E: 0680: Supported MIDs [81-A0] - 
+O2_SENSORS: 0113: O2 Sensors Present - ((), (False, False, True, True), (False, False, True, True))
+TIMING_ADVANCE: 010E: Timing Advance - 36.5 degree
+ELM_VERSION: ATI: ELM327 version string - ELM327 v1.5
+LONG_FUEL_TRIM_2: 0109: Long Term Fuel Trim - Bank 2 - 1.5625 percent
+LONG_FUEL_TRIM_1: 0107: Long Term Fuel Trim - Bank 1 - -5.46875 percent
+MAF: 0110: Air Flow Rate (MAF) - 6.54 gps
+STATUS: 0101: Status since DTCs cleared - <obd.OBDResponse.Status instance at 0x7f056e370170>
+ENGINE_LOAD: 0104: Calculated Engine Load - 2.74509803922 percent
+MIDS_F: 06A0: Supported MIDs [A1-C0] - 
+GET_DTC: 03: Get DTCs - []
+INTAKE_PRESSURE: 010B: Intake Manifold Pressure - 33 kilopasca
+COOLANT_TEMP: 0105: Engine Coolant Temperature - 89 degC
+FUEL_STATUS: 0103: Fuel System Status - ('Closed loop, using oxygen sensor feedback to determine fuel mix', 'Closed loop, using oxygen sensor feedback to determine fuel mix')
+THROTTLE_POS: 0111: Throttle Position - 8.62745098039 percent
+O2_B2S1: 0118: O2: Bank 2 - Sensor 1 Voltage - 0.85 volt
+O2_B2S2: 0119: O2: Bank 2 - Sensor 2 Voltage - 0.915 volt
+SPEED: 010D: Vehicle Speed - 12 kph
+PIDS_A: 0100: Supported PIDs [01-20] - 10111111101111111011100110010100
+PIDS_B: 0120: Supported PIDs [21-40] - 00000000000000000000000000000000
+AUX_INPUT_STATUS: 011E: Auxiliary input status (power take off) - False
+SHORT_FUEL_TRIM_1: 0106: Short Term Fuel Trim - Bank 1 - -0.78125 percent
+SHORT_FUEL_TRIM_2: 0108: Short Term Fuel Trim - Bank 2 - 0.0 percent
+RPM: 010C: Engine RPM - 854.25 revolutions_per_minute
+O2_B1S2: 0115: O2: Bank 1 - Sensor 2 Voltage - 0.56 volt
+O2_B1S1: 0114: O2: Bank 1 - Sensor 1 Voltage - 0.205 volt
