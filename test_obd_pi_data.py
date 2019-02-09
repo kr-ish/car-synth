@@ -31,11 +31,26 @@ counter = 0
 while (time.time() - initial < 20):
     timeref = time.time()
     timestep = .5
-    if ((time.time() - timeref) < timestep): 
-        led1.value = float(speed[counter]) / 50.0
-        led2.value = (float(rpm[counter]) - 500.0) / 1500.0
-        led3.value = (float(throttle[counter]) - 5.0) / 30.0
-        led4.value = float(speed[counter]) / 50.0
+    if ((time.time() - timeref) < timestep):
+        
+        val =  float(speed[counter]) / 50.0
+        print val
+        led1.value = val
+
+        
+        val = (float(rpm[counter]) - 500) / 1500
+        print val
+        led2.value = val
+
+        
+        val = (float(throttle[counter]) - 5.0) / 30.0
+        print val
+        led3.value = val
+        
+        val = float(speed[counter]) / 50.0
+        print val
+        led4.value = val
+
         counter += 1
     if counter >= len(speed):
         counter = 0
