@@ -33,7 +33,7 @@ while (time.time() - initial < 20):
     timestep = .5
     if ((time.time() - timeref) < timestep):
         
-        val =  float(speed[counter]) / 50.0
+        val =  float(speed[counter]) / 150.0
         print val
         led1.value = val
 
