@@ -1,4 +1,4 @@
-from gpiozero import LED, Button
+from gpiozero import PWMLED, Button
 from signal import pause
 from time import sleep
 
