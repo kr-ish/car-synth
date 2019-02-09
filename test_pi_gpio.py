@@ -2,7 +2,7 @@ from gpiozero import PWMLED, Button
 from signal import pause
 from time import sleep
 
-led = PWMLED(17)
+led = PWMLED(17, frequency=490)
 # button = Button(3)
 
 # button.when_pressed = led.on
@@ -10,8 +10,10 @@ led = PWMLED(17)
 
 # pause()
 
+value = 0.0
 while True:
-    led.value += 0.05
-    led.value = led.value % 1.0
-    sleep(1)
-    
+    value += 0.05
+    value = value % 1.0
+    led.value = value
+    sleep(0.1)
+
