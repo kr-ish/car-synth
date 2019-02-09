@@ -6,13 +6,10 @@ from time import sleep
 connection = obd.OBD()  # auto-connects
 print(connection.status())
 
-speed_cmd = obd.commands.SPEED
-rpm_cmd = obd.commands.SPEED
-throttle_cmd = obd.commands.THROTTLE_POS
-fuel_trim_cmd = obd.commands.LONG_FUEL_TRIM_1
-
-# TODO: add ranges
-
+speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
+rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
+throttle_cmd = obd.commands.THROTTLE_POS  # throttle 0-40 % in data
+fuel_trim_cmd = obd.commands.LONG_FUEL_TRIM_1  # -5 to 8 % in data
 
 # Setup GPIO
 vca = PWMLED(17, frequency=490)
