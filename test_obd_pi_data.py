@@ -32,10 +32,10 @@ while (time.time() - initial < 20):
     timeref = time.time()
     timestep = .5
     if ((time.time() - timeref) < timestep): 
-        led1.value(speed[counter])
-        led2.value(rpm[counter])
-        led3.value(throttle[counter])
-        led4.value(speed[counter])
+        led1.value(float(speed[counter]) / 50)
+        led2.value((float(rpm[counter]) - 500) / 1500)
+        led3.value((float(throttle[counter]) - 5) / 30)
+        led4.value(float(speed[counter]) / 50)
         counter += 1
     if counter >= len(speed):
         counter = 0
