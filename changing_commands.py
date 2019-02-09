@@ -1,0 +1,20 @@
+COMMAND_NAMES = [
+    'INTAKE_TEMP',
+    'TIMING_ADVANCE',
+    'LONG_FUEL_TRIM_2',
+    'LONG_FUEL_TRIM_1',
+    'MAF',
+    'ENGINE_LOAD',
+    'INTAKE_PRESSURE',
+    'COOLANT_TEMP',
+    'THROTTLE_POS',
+    'O2_B2S1',
+    'O2_B2S2',
+    'SPEED',
+    'AUX_INPUT_STATUS',
+    'SHORT_FUEL_TRIM_1',
+    'SHORT_FUEL_TRIM_2',
+    'RPM',
+    'O2_B1S2',
+    'O2_B1S1'
+]
