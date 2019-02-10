@@ -29,6 +29,7 @@ lfo_clipped_val = 0.0
 
 speed_val = 0.0
 rpm_val = 0.0
+fuel_trim_val = 0.0
 
 # Setup OBD connection - keep trying till successful
 connection = obd.OBD()  # auto-connects
@@ -102,6 +103,6 @@ while (True):
     print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
     lfo.value = lfo_clipped_val
 
-    sleep_val = (1.0 - (speed_val / 100)) * 0.3
+    sleep_val = (1.0 - (speed_val / 100)) * 0.2
     print('sleep val {}'.format(sleep_val))
     sleep(sleep_val)
