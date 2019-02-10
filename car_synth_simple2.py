@@ -54,10 +54,10 @@ while (True):
     fuel_trim_val = 5.0
 
 
-    # vco_next_value = (speed_val / 100 + .3) + \
-    #     ((random.rand() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
-    vco_next_value = (speed_val / 160 + .3) \
-        + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
+    vco_next_value = (speed_val / 160 + .3) + \
+        ((random.rand() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
+    # vco_next_value = (speed_val / 160 + .3) \
+    #     + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
     if vco_next_value > 1:
         vco_clipped_value = 1.0
     elif vco_next_value < 0:
