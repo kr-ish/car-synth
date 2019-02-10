@@ -2,7 +2,7 @@ import obd
 from gpiozero import PWMLED
 from time import sleep
 from random import random
-import threading
+import thread
 
 
 # OBD commands
