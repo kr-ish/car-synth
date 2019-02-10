@@ -4,8 +4,8 @@ from time import sleep
 from random import random
 
 # Setup OBD connection and commands
-# connection = obd.OBD()  # auto-connects
-# print(connection.status())
+connection = obd.OBD()  # auto-connects
+print(connection.status())
 
 speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
 rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
@@ -33,32 +33,34 @@ lfo_clipped_val = 0.0
 while (True):
 
     # Speed + RPM to VCO
-    # speed_resp = connection.query(speed_cmd, force=True)
-    # fuel_trim_resp = connection.query(fuel_trim_cmd, force=True)
-    # rpm_resp = connection.query(rpm_cmd, force=True)
+    speed_resp = connection.query(speed_cmd, force=True)
+    fuel_trim_resp = connection.query(fuel_trim_cmd, force=True)
+    rpm_resp = connection.query(rpm_cmd, force=True)
 
-    # if speed_resp.is_null():
-    #     print('speed_resp null')
-    #     continue
-    # elif rpm_resp.is_null():
-    #     print('rpm_resp null')
-    #     continue
-    # elif fuel_trim_resp.is_null():
-    #     print('fuel_trim_resp null')
-    #     continue
+    if speed_resp.is_null():
+        print('speed_resp null')
+        continue
+    elif rpm_resp.is_null():
+        print('rpm_resp null')
+        continue
+    elif fuel_trim_resp.is_null():
+        print('fuel_trim_resp null')
+        continue
 
-    # speed_val = float(speed_resp.value.magnitude)
-    # rpm_val = float(rpm_resp.value.magnitude)
-    # fuel_trim_val = float(fuel_trim_resp.value.magnitude)
-    speed_val = 60
-    rpm_val = 2000
-    fuel_trim_val = 5.0
+    speed_val = float(speed_resp.value.magnitude)
+    rpm_val = float(rpm_resp.value.magnitude)
+    fuel_trim_val = float(fuel_trim_resp.value.magnitude)
+
+    # Test
+    # speed_val = 60
+    # rpm_val = 2000
+    # fuel_trim_val = 5.0
 
 
-    vco_next_value = (speed_val / 160 + .3) + \
-        ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
-    # vco_next_value = (speed_val / 160 + .3) \
-    #     + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
+    # vco_next_value = (speed_val / 160 + .3) + \
+    #     ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
+    vco_next_value = (speed_val / 160 + .3) \
+        + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
     if vco_next_value > 1:
         vco_clipped_value = 1.0
     elif vco_next_value < 0:
