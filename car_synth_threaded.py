@@ -43,9 +43,9 @@ while speed_resp.is_null():
 def read_obd():
     global speed_val
     global rpm_val
-    global vco_next_value
-    global vca_next_value
-    global lfo_next_value
+    global vco_next_val
+    global vca_next_val
+    global lfo_next_val
 
     speed_resp = connection.query(speed_cmd, force=True)
     rpm_resp = connection.query(rpm_cmd, force=True)
@@ -55,14 +55,14 @@ def read_obd():
     rpm_val = float(rpm_resp.value.magnitude)
     # fuel_trim_val = float(fuel_trim_resp.value.magnitude)
 
-    vco_next_value = (speed_val / 100 + .3) + \
+    vco_next_val = (speed_val / 100 + .3) + \
         ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
-    # vco_next_value = (speed_val / 100 + .3) \
+    # vco_next_val = (speed_val / 100 + .3) \
     #    + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
 
-    vca_next_value = vco_clipped_value + 0.1
+    vca_next_val = vco_clipped_val + 0.1
 
-    lfo_next_value = (rpm_val - 480) / 1720
+    lfo_next_val = (rpm_val - 480) / 1720
 
 
 
@@ -71,31 +71,31 @@ thread.start_new_thread(read_obd, ())
 
 while (True):
 
-    if vco_next_value > 1.0:
-        vco_clipped_value = 1.0
-    elif vco_next_value < 0:
-        vco_clipped_value = 0.0
+    if vco_next_val > 1.0:
+        vco_clipped_val = 1.0
+    elif vco_next_val < 0:
+        vco_clipped_val = 0.0
     else:
-        vco_clipped_value = vco_next_value
-    print('vco_next_value {}, vco_clipped_value {}'.format(vco_next_value, vco_clipped_value))
-    vco.value = vco_clipped_value
+        vco_clipped_val = vco_next_val
+    print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
+    vco.val = vco_clipped_val
 
-    if vca_next_value > 1.0:
-        vca_clipped_value = 1.0
+    if vca_next_val > 1.0:
+        vca_clipped_val = 1.0
     else:
-        vca_clipped_value = vca_next_value
-    print('vca_next_value {}, vca_clipped_value {}'.format(vca_next_value, vca_clipped_value))
-    vca.value = vca_clipped_value
+        vca_clipped_val = vca_next_val
+    print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
+    vca.val = vca_clipped_val
 
     # Fuel Trim to LFO
-    if lfo_next_value > 1.0:
-        lfo_clipped_value = 1.0
-    elif lfo_next_value < 0:
-        lfo_clipped_value = 0.0
+    if lfo_next_val > 1.0:
+        lfo_clipped_val = 1.0
+    elif lfo_next_val < 0:
+        lfo_clipped_val = 0.0
     else:
-        lfo_clipped_value = lfo_next_value
-    print('lfo_next_value {}, lfo_clipped_value {}'.format(lfo_next_value, lfo_clipped_value))
-    lfo.value = lfo_clipped_value
+        lfo_clipped_val = lfo_next_val
+    print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
+    lfo.val = lfo_clipped_val
 
     sleep_val = (1.0 - (speed_val / 100)) * 0.3
     print('sleep val {}'.format(sleep_val))
