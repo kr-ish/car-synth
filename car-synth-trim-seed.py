@@ -45,7 +45,7 @@ try:
     fuel_trim_resp = connection.query(fuel_trim_cmd, force=True)
     fuel_trim_val = float(fuel_trim_resp.value.magnitude)
     fuel_trim_val = int(((fuel_trim_val + 9) / 20 - .5) * 1000)
-    set_seed(fuel_trim_val)
+    seed(fuel_trim_val)
 except Exception as e:
     print('error in trim seed: {}'.format(e))
     pass
