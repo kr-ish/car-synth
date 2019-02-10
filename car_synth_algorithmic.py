@@ -7,7 +7,7 @@ from random import random
 # OBD commands
 speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
 rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
-throttle_cmd = obd.commands.THROTTLE_POS  # throttle 0-40 % in data
+# throttle_cmd = obd.commands.THROTTLE_POS  # throttle 0-40 % in data
 fuel_trim_cmd = obd.commands.SHORT_FUEL_TRIM_1  # -5 to 8 % in data
 
 # Setup GPIO
@@ -43,7 +43,7 @@ while (True):
 
     # Speed + RPM to VCO
     speed_resp = connection.query(speed_cmd, force=True)
-    fuel_trim_resp = connection.query(fuel_trim_cmd, force=True)
+    # fuel_trim_resp = connection.query(fuel_trim_cmd, force=True)
     rpm_resp = connection.query(rpm_cmd, force=True)
 
     if speed_resp.is_null():
@@ -52,13 +52,13 @@ while (True):
     elif rpm_resp.is_null():
         print('rpm_resp null')
         continue
-    elif fuel_trim_resp.is_null():
-        print('fuel_trim_resp null')
-        continue
+    # elif fuel_trim_resp.is_null():
+    #     print('fuel_trim_resp null')
+    #     continue
 
     speed_val = float(speed_resp.value.magnitude)
     rpm_val = float(rpm_resp.value.magnitude)
-    fuel_trim_val = float(fuel_trim_resp.value.magnitude)
+    # fuel_trim_val = float(fuel_trim_resp.value.magnitude)
 
     # Test
     # speed_val = 60
