@@ -78,14 +78,14 @@ while (True):
     else:
         vco_clipped_val = vco_next_val
     print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
-    vco.val = vco_clipped_val
+    vco.value = vco_clipped_val
 
     if vca_next_val > 1.0:
         vca_clipped_val = 1.0
     else:
         vca_clipped_val = vca_next_val
     print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
-    vca.val = vca_clipped_val
+    vca.value = vca_clipped_val
 
     # Fuel Trim to LFO
     if lfo_next_val > 1.0:
@@ -95,7 +95,7 @@ while (True):
     else:
         lfo_clipped_val = lfo_next_val
     print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
-    lfo.val = lfo_clipped_val
+    lfo.value = lfo_clipped_val
 
     sleep_val = (1.0 - (speed_val / 100)) * 0.3
     print('sleep val {}'.format(sleep_val))
