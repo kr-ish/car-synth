@@ -57,11 +57,11 @@ while (True):
     # fuel_trim_val = 5.0
 
 
-    # vco_next_value = (speed_val / 160 + .3) + \
-    #     ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
-    vco_next_value = (speed_val / 160 + .3) \
-        + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
-    if vco_next_value > 1:
+    vco_next_value = (speed_val / 100 + .3) + \
+        ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
+    # vco_next_value = (speed_val / 100 + .3) \
+    #    + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
+    if vco_next_value > 1.0:
         vco_clipped_value = 1.0
     elif vco_next_value < 0:
         vco_clipped_value = 0.0
@@ -70,9 +70,17 @@ while (True):
     print('vco_next_value {}, vco_clipped_value {}'.format(vco_next_value, vco_clipped_value))
     vco.value = vco_clipped_value
 
+    vca_next_value = vco_clipped_value + 0.1
+    if vca_next_value > 1.0:
+        vca_clipped_value = 1.0
+    else:
+        vca_clipped_value = vca_next_value
+    print('vca_next_value {}, vca_clipped_value {}'.format(vca_next_value, vca_clipped_value))
+    vca.value = vca_clipped_value
+
     # Fuel Trim to LFO
     lfo_next_value = (rpm_val - 480) / 1720
-    if lfo_next_value > 1:
+    if lfo_next_value > 1.0:
         lfo_clipped_value = 1.0
     elif lfo_next_value < 0:
         lfo_clipped_value = 0.0
@@ -80,4 +88,7 @@ while (True):
         lfo_clipped_value = lfo_next_value
     print('lfo_next_value {}, lfo_clipped_value {}'.format(lfo_next_value, lfo_clipped_value))
     lfo.value = lfo_clipped_value
-    sleep(0.07)
+
+    sleep_val = (1.0 - (speed_val / 100)) * 0.3
+    print('sleep val {}'.format(sleep_val))
+    sleep(sleep_val)
