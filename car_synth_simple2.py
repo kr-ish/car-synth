@@ -3,8 +3,8 @@ from gpiozero import PWMLED
 from time import sleep
 
 # Setup OBD connection and commands
-connection = obd.OBD()  # auto-connects
-print(connection.status())
+# connection = obd.OBD()  # auto-connects
+# print(connection.status())
 
 speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
 rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
