@@ -122,11 +122,11 @@ print('on switch pressed')
 thread.start_new_thread(read_obd, ())
 
 while (True):
-    if mode_switch.is_pressed():
-        vco_val, vca_val, lfo_val, sleep_val = yukon_fix(speed_val, rpm_val)
+    if mode_switch.is_pressed:
+        vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
     else:
-        vco_val, vca_val, lfo_val, sleep_val = simple(speed_val, rpm_val)
-        # vco_val, vca_val, lfo_val, sleep_val = inverse_fix(speed_val, rpm_val)
+        vco_next_val, vca_next_val, lfo_next_val, sleep_val = simple(speed_val, rpm_val)
+        # vco_next_val, vca_next_val, lfo_next_val, sleep_val = inverse_fix(speed_val, rpm_val)
 
     # Limit values 0-1
     if vco_next_val > 1.0:
