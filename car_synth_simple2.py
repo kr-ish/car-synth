@@ -78,3 +78,5 @@ while (True):
         lfo_clipped_value = lfo_next_value
     print('lfo_next_value {}, lfo_clipped_value {}'.format(lfo_next_value, lfo_clipped_value))
     lfo.value = lfo_clipped_value
+    sleep(0.5)
+    
