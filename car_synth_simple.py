@@ -27,7 +27,7 @@ lfo_next_val = 0.0
 # main
 while (True):
 
-    # # Throttle to VCA
+    # Throttle to VCA
     throttle_resp = connection.query(throttle_cmd, force=True)
     if not throttle_resp.is_null():
         throttle_val = float(throttle_resp.value.magnitude)
