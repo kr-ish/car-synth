@@ -84,7 +84,7 @@ while (True):
     vco.value = vco_clipped_val
 
 
-    vca_next_val = vco_clipped_val + 0.1
+    vca_next_val = vco_clipped_val
     if vca_next_val > 1.0:
         vca_clipped_val = 1.0
     else:
