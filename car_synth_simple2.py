@@ -50,8 +50,8 @@ while (True):
     # speed_val = float(speed_resp.value.magnitude)
     # rpm_val = float(rpm_resp.value.magnitude)
     # fuel_trim_val = float(fuel_trim_resp.value.magnitude)
-    speed_val = 30.0
-    rpm_val = 1500
+    speed_val = 60
+    rpm_val = 2000
     fuel_trim_val = 5.0
 
 
@@ -78,5 +78,4 @@ while (True):
         lfo_clipped_value = lfo_next_value
     print('lfo_next_value {}, lfo_clipped_value {}'.format(lfo_next_value, lfo_clipped_value))
     lfo.value = lfo_clipped_value
-    sleep(0.5)
-    
+    sleep(0.07)
