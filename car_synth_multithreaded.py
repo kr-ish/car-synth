@@ -40,7 +40,7 @@ while speed_resp.is_null():
     connection = obd.OBD()  # auto-connects
     print(connection.status())
     speed_resp = connection.query(speed_cmd, force=True)
-    sleep(0.2)
+    # sleep(0.2)
 
 def read_rpm():
     global rpm_val
