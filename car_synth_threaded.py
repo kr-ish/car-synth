@@ -38,7 +38,6 @@ while speed_resp.is_null():
     connection = obd.OBD()  # auto-connects
     print(connection.status())
     speed_resp = connection.query(speed_cmd, force=True)
-    sleep(0.2)
 
 def read_obd():
     global speed_val
@@ -70,8 +69,6 @@ while (True):
     # vco_next_val = (speed_val / 100 + .3) \
     #    + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
 
-    vca_next_val = vco_clipped_val + 0.1
-
     lfo_next_val = (rpm_val - 480) / 1720
 
 
@@ -84,6 +81,8 @@ while (True):
     print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
     vco.value = vco_clipped_val
 
+
+    vca_next_val = vco_clipped_val + 0.1
     if vca_next_val > 1.0:
         vca_clipped_val = 1.0
     else:
