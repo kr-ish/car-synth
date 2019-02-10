@@ -1,6 +1,7 @@
 import obd
 from gpiozero import PWMLED
 from time import sleep
+from random import random
 
 # Setup OBD connection and commands
 # connection = obd.OBD()  # auto-connects
@@ -55,7 +56,7 @@ while (True):
 
 
     vco_next_value = (speed_val / 160 + .3) + \
-        ((random.rand() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
+        ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
     # vco_next_value = (speed_val / 160 + .3) \
     #     + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
     if vco_next_value > 1:
