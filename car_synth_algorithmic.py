@@ -3,10 +3,8 @@ from gpiozero import PWMLED
 from time import sleep
 from random import random
 
-# Setup OBD connection and commands
-connection = obd.OBD()  # auto-connects
-print(connection.status())
 
+# OBD commands
 speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
 rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
 throttle_cmd = obd.commands.THROTTLE_POS  # throttle 0-40 % in data
@@ -27,6 +25,17 @@ vca_clipped_val = 0.0
 vcf_clipped_val = 0.0
 vco_clipped_val = 0.0
 lfo_clipped_val = 0.0
+
+
+# Setup OBD connection - keep trying till successful
+connection = obd.OBD()  # auto-connects
+print(connection.status())
+speed_resp = connection.query(speed_cmd, force=True)
+while speed_resp.is_null():
+    connection = obd.OBD()  # auto-connects
+    print(connection.status())
+    speed_resp = connection.query(speed_cmd, force=True)
+    sleep(0.2)
 
 
 # main
