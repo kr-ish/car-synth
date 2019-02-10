@@ -125,8 +125,8 @@ while (True):
     if mode_switch.is_pressed:
         vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
     else:
-        vco_next_val, vca_next_val, lfo_next_val, sleep_val = simple(speed_val, rpm_val)
-        # vco_next_val, vca_next_val, lfo_next_val, sleep_val = inverse_fix(speed_val, rpm_val)
+        #vco_next_val, vca_next_val, lfo_next_val, sleep_val = simple(speed_val, rpm_val)
+        vco_next_val, vca_next_val, lfo_next_val, sleep_val = inverse_fix(speed_val, rpm_val)
 
     # Limit values 0-1
     if vco_next_val > 1.0:
