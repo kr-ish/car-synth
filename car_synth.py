@@ -76,9 +76,14 @@ def yukon_fix(speed_val, rpm_val, fuel_trim_val=None):
 
     # Sleep
     sleep_val = (1.0 - (speed_val / 100)) * 0.2
-    print('sleep val {}'.format(sleep_val))
 
     return(vco_next_val, vca_next_val, lfo_next_val, sleep_val)
+
+def inverse_fix(speed_val, rpm_val, fuel_trim_val=None):
+
+    vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
+
+    return(1.0 - vco_next_val, vca_next_val, 1.0 - lfo_next_val, sleep_val)
 
 
 def simple(speed_val, rpm_valm, fuel_trim_val=None):
@@ -98,8 +103,8 @@ def simple(speed_val, rpm_valm, fuel_trim_val=None):
     # print('sleep val {}'.format(sleep_val))
 
     return(vco_next_val, vca_next_val, lfo_next_val, sleep_val)
-# main
 
+# main
 # switch on
 on_switch.wait_for_press()
 print('on switch pressed')
@@ -112,6 +117,7 @@ while (True):
         vco_val, vca_val, lfo_val, sleep_val = yukon_fix(speed_val, rpm_val)
     else:
         vco_val, vca_val, lfo_val, sleep_val = simple(speed_val, rpm_val)
+        # vco_val, vca_val, lfo_val, sleep_val = inverse_fix(speed_val, rpm_val)
 
     # Limit values 0-1
     if vco_next_val > 1.0:
@@ -140,4 +146,5 @@ while (True):
     vca.value = vca_clipped_val
     lfo.value = lfo_clipped_val
 
+    print('sleep val {}'.format(sleep_val))
     sleep(sleep_val)
