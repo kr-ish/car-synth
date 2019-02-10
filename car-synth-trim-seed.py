@@ -68,7 +68,7 @@ def read_obd():
             sleep(0.2)
             continue
 
-        print('speed_val {}, rpm_val {}'.format(speed_val, rpm_val))
+        # print('speed_val {}, rpm_val {}'.format(speed_val, rpm_val))
 
 
 def yukon_fix(speed_val, rpm_val, fuel_trim_val=None):
@@ -135,7 +135,7 @@ while (True):
         vco_clipped_val = 0.0
     else:
         vco_clipped_val = vco_next_val
-    print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
+    # print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
 
     if lfo_next_val > 1.0:
         lfo_clipped_val = 1.0
@@ -143,17 +143,18 @@ while (True):
         lfo_clipped_val = 0.0
     else:
         lfo_clipped_val = lfo_next_val
-    print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
+    # print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
 
     if vca_next_val > 1.0:  # redundant if not shifted
         vca_clipped_val = 1.0
     else:
         vca_clipped_val = vca_next_val
-    print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
+    # print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
 
     vco.value = vco_clipped_val
     vca.value = vca_clipped_val
     lfo.value = lfo_clipped_val
 
-    print('sleep val {}'.format(sleep_val))
+    # print('sleep val {}'.format(sleep_val))
+    print('vco {}, vca {}, lfo {}, sleep {}'.format(vco_clipped_val, vca_clipped_val, lfo_clipped_val, sleep_val))
     sleep(sleep_val)
