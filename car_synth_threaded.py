@@ -43,6 +43,9 @@ while speed_resp.is_null():
 def read_obd():
     global speed_val
     global rpm_val
+    global vco_next_value
+    global vca_next_value
+    global lfo_next_value
 
     speed_resp = connection.query(speed_cmd, force=True)
     rpm_resp = connection.query(rpm_cmd, force=True)
@@ -52,16 +55,22 @@ def read_obd():
     rpm_val = float(rpm_resp.value.magnitude)
     # fuel_trim_val = float(fuel_trim_resp.value.magnitude)
 
+    vco_next_value = (speed_val / 100 + .3) + \
+        ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
+    # vco_next_value = (speed_val / 100 + .3) \
+    #    + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
+
+    vca_next_value = vco_clipped_value + 0.1
+
+    lfo_next_value = (rpm_val - 480) / 1720
+
+
 
 # main
 thread.start_new_thread(read_obd, ())
 
 while (True):
 
-    vco_next_value = (speed_val / 100 + .3) + \
-        ((random() - .5) * (3.0/5)) * (rpm_val  - 480) / 1720
-    # vco_next_value = (speed_val / 100 + .3) \
-    #    + ((fuel_trim_val + 9) / 20 - .5) * (3.0/5) * (rpm_val  - 480) / 1720
     if vco_next_value > 1.0:
         vco_clipped_value = 1.0
     elif vco_next_value < 0:
@@ -71,7 +80,6 @@ while (True):
     print('vco_next_value {}, vco_clipped_value {}'.format(vco_next_value, vco_clipped_value))
     vco.value = vco_clipped_value
 
-    vca_next_value = vco_clipped_value + 0.1
     if vca_next_value > 1.0:
         vca_clipped_value = 1.0
     else:
@@ -80,7 +88,6 @@ while (True):
     vca.value = vca_clipped_value
 
     # Fuel Trim to LFO
-    lfo_next_value = (rpm_val - 480) / 1720
     if lfo_next_value > 1.0:
         lfo_clipped_value = 1.0
     elif lfo_next_value < 0:
