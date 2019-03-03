@@ -92,7 +92,7 @@ def inverse_fix(speed_val, rpm_val, fuel_trim_val=None):
 
     vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
 
-    return(1.0 - vco_next_val, vca_next_val, 1.0 - lfo_next_val, sleep_val)
+    return(1.0 - lfo_next_val, vca_next_val, 1.0 - vco_next_val, sleep_val)
 
 
 def simple(speed_val, rpm_valm, fuel_trim_val=None):
@@ -115,46 +115,52 @@ def simple(speed_val, rpm_valm, fuel_trim_val=None):
 
 # main
 # switch on
-on_switch.wait_for_press()
-print('on switch pressed')
+#on_switch.wait_for_press()
+#print('on switch pressed')
 
 
 thread.start_new_thread(read_obd, ())
 
 while (True):
-    if mode_switch.is_pressed:
-        vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
-    else:
-        #vco_next_val, vca_next_val, lfo_next_val, sleep_val = simple(speed_val, rpm_val)
-        vco_next_val, vca_next_val, lfo_next_val, sleep_val = inverse_fix(speed_val, rpm_val)
+#    if on_switch.is_pressed:
+        if mode_switch.is_pressed:
+            vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
+        else:
+            #vco_next_val, vca_next_val, lfo_next_val, sleep_val = simple(speed_val, rpm_val)
+            vco_next_val, vca_next_val, lfo_next_val, sleep_val = inverse_fix(speed_val, rpm_val)
 
-    # Limit values 0-1
-    if vco_next_val > 1.0:
-        vco_clipped_val = 1.0
-    elif vco_next_val < 0:
-        vco_clipped_val = 0.0
-    else:
-        vco_clipped_val = vco_next_val
-    # print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
+        # Limit values 0-1
+        if vco_next_val > 1.0:
+            vco_clipped_val = 1.0
+        elif vco_next_val < 0:
+            vco_clipped_val = 0.0
+        else:
+            vco_clipped_val = vco_next_val
+        # print('vco_next_val {}, vco_clipped_val {}'.format(vco_next_val, vco_clipped_val))
 
-    if lfo_next_val > 1.0:
-        lfo_clipped_val = 1.0
-    elif lfo_next_val < 0:
-        lfo_clipped_val = 0.0
-    else:
-        lfo_clipped_val = lfo_next_val
-    # print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
+        if lfo_next_val > 1.0:
+            lfo_clipped_val = 1.0
+        elif lfo_next_val < 0:
+            lfo_clipped_val = 0.0
+        else:
+            lfo_clipped_val = lfo_next_val
+        # print('lfo_next_val {}, lfo_clipped_val {}'.format(lfo_next_val, lfo_clipped_val))
 
-    if vca_next_val > 1.0:  # redundant if not shifted
-        vca_clipped_val = 1.0
-    else:
-        vca_clipped_val = vca_next_val
-    # print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
+        if vca_next_val > 1.0:  # redundant if not shifted
+            vca_clipped_val = 1.0
+        else:
+            vca_clipped_val = vca_next_val
+        # print('vca_next_val {}, vca_clipped_val {}'.format(vca_next_val, vca_clipped_val))
 
-    vco.value = vco_clipped_val
-    vca.value = vca_clipped_val
-    lfo.value = lfo_clipped_val
+        vco.value = vco_clipped_val
+        vca.value = vca_clipped_val
+        lfo.value = lfo_clipped_val
+        vcf.value = lfo_clipped_val
 
-    # print('sleep val {}'.format(sleep_val))
-    print('vco {}, vca {}, lfo {}, sleep {}'.format(vco_clipped_val, vca_clipped_val, lfo_clipped_val, sleep_val))
-    sleep(sleep_val)
+        # print('sleep val {}'.format(sleep_val))
+        print('vco {}, vca {}, lfo {}, sleep {}'.format(vco_clipped_val, vca_clipped_val, lfo_clipped_val, sleep_val))
+        sleep(sleep_val)
+ #   else:
+ #       vca.value = 0.0
+ #       vcf.value = 0.0
+
