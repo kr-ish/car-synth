@@ -106,8 +106,8 @@ def simple(speed_val, rpm_valm, fuel_trim_val=None):
 
 # main
 # switch on
-on_switch.wait_for_press()
-print('on switch pressed')
+# on_switch.wait_for_press()
+# print('on switch pressed')
 
 
 thread.start_new_thread(read_obd, ())
