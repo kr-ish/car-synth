@@ -3,6 +3,18 @@ from gpiozero import PWMLED, Button
 from time import sleep
 from random import random
 import thread
+import sounddevice as sd
+import soundfile as sf
+
+
+# Drums samples loaded into memory
+DRUM_PATHS = [
+    './samples/kick-808.wav',
+    './samples/hihat-808.wav',
+    './samples/snare-808.wav',
+]
+DRUM_DATA_FS = [sf.read(filename, dtype='float32') for filename in DRUM_PATHS]
+DRUM_MAX_INDEX = len(DRUM_DATA_FS) - 1
 
 # OBD commands
 speed_cmd = obd.commands.SPEED  # 0-50 kph, 0-120 kph in data
@@ -112,7 +124,13 @@ print('on switch pressed')
 
 thread.start_new_thread(read_obd, ())
 
+drum_index = 0
 while (True):
+
+    data, fs = DRUM_DATA_FS[drum_index]
+    sd.play(data, fs)
+    drum_index = (drum_index + 1) % DRUM_MAX_INDEX
+
     if mode_switch.is_pressed:
         vco_next_val, vca_next_val, lfo_next_val, sleep_val = yukon_fix(speed_val, rpm_val)
     else:
