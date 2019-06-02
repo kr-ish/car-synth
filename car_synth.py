@@ -23,12 +23,12 @@ rpm_cmd = obd.commands.RPM  #  400 to 2200 RPM in data
 fuel_trim_cmd = obd.commands.SHORT_FUEL_TRIM_1  # -5 to 8 % in data
 
 # Setup GPIO
-vca = PWMLED(17, frequency=490)
-vcf = PWMLED(18, frequency=490)
-vco = PWMLED(22, frequency=490)
-lfo = PWMLED(23, frequency=490)
+vca = PWMLED(17, frequency=490)  # yellow
+vcf = PWMLED(18, frequency=490)  # blue
+vco = PWMLED(22, frequency=490)  # red
+lfo = PWMLED(23, frequency=490)  # green
 on_switch = Button(24, pull_up=True)  # connect to GND
-mode_switch = Button(27, pull_up=True)  # connect to GND
+mode_switch = Button(10, pull_up=True)  # connect to GND
 
 # GPIO update vars
 vca_next_val = 0.0
