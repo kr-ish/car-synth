@@ -1,5 +1,8 @@
 #!/usr/bin/expect -f
 
+# Pairs bluetooth device at provided MAC address
+# Taken from https://gist.github.com/RamonGilabert/046727b302b4d9fb0055
+
 set prompt "#"
 set address [lindex $argv 0]
 
