@@ -1,18 +1,11 @@
+"""Tests OBD connection and prints all available commands."""
+
 import obd
-from command_names import COMMAND_NAMES
 
-connection = obd.OBD() # auto-connects to USB or RF port
-
-
-# TODO: try in interactive mode??
-# connection.print_commands()
-
+connection = obd.OBD()  # auto-connects to USB or RF port
 
 all_commands = obd.commands.__dict__
 all_command_names = all_commands.keys()
-
-# TODO: try
-# all_command_names = COMMAND_NAMES
 
 for name in all_command_names:
     cmd = all_commands[name]
